@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include ('../layouts/header'); %>
+
+    <body>
+        <main class="flex-shrink-0">
+            <!-- Navigation-->
+            <%- include ('../layouts/navbar'); %>
+
+                <header class="bg-dark py-5">
+                    <div class="container px-5">
+                        <div class="row gx-5 align-items-center justify-content-center">
+                            <div class="col-lg-8 col-xl-7 col-xxl-6">
+                                <div class="my-5 text-center text-xl-start">
+                                    <h1 class="display-5 fw-bolder text-white mb-2">Appointment Manage</h1>
+                                    <p class="lead fw-normal text-white-50 mb-4">Drive Test Booking Kiosk</p>
+
+
+                                </div>
+                            </div>
+                            <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img
+                                    class="img-fluid rounded-3 my-5" src="/assets/Dashboard.jpeg" alt="..." /></div>
+                        </div>
+                    </div>
+                </header>
+
+
+                <section class="py-5">
+                    <div class="container">
+                        <div class="row">
+
+                            <div class=" offset-2 col-8">
+                                <div class="container px-5">
+
+                                    <div class="bg-light rounded-3 py-5 px-4 px-md-5 mb-5">
+                                        <div class="text-center mb-5">
+                                            <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i
+                                                    class="bi bi-calendar"></i></div>
+                                            <h1 class="fw-bolder">Appointment Setup</h1>
+                                        </div>
+                                        <div class="row gx-5 justify-content-center">
+                                            <div class="col-12">
+                                                <% if(errors !=null && errors.length> 0){ %>
+                                                    <ul class="list-group mb-3">
+                                                        <% for (var i=0; i < errors.length; i++) { %>
+                                                            <li class="list-group-item list-group-item-danger">
+                                                                <%=errors[i] %>
+                                                            </li>
+                                                            <% } %>
+
+                                                    </ul>
+                                                    <% } %>
+                                                        <% if(success !=null && success.length> 0){ %>
+                                                            <ul class="list-group mb-3">
+                                                                <li class="list-group-item list-group-item-success">
+                                                                    <%=success %>
+                                                                </li>
+                                                            </ul>
+                                                            <% } %>
+                                            </div>
+                                            <div class="col-12">
+
+                                                <% if(date=="" ){ %>
+                                                    <form action="/admin/appointment" autocomplete="off" method="get">
+                                                        <div class="form-floating mb-3">
+                                                            <input class="form-control" id="datepicker" required
+                                                                type="text" name="date" placeholder="">
+                                                            <label for="inputUsername">Date</label>
+                                                        </div>
+
+
+                                                        <div class="mt-4 mb-0">
+                                                            <div class="d-grid">
+                                                                <!-- <a class="small" href="password.html">Forgot Password?</a> -->
+                                                                <button class="btn btn-primary btn-block"
+                                                                    type="submit">Proceed</button>
+                                                            </div>
+
+                                                        </div>
+                                                    </form>
+                                                    <% } else { %>
+
+                                                        <form action="/admin/appointment/save" autocomplete="off"
+                                                            method="post">
+
+                                                            
+                                                            <div class="form-floating mb-3">
+                                                                <input class="form-control" value="<%=date%>" readonly
+                                                                    type="text" name="date" placeholder="">
+                                                                <label for="inputUsername">Date</label>
+                                                            </div>
+
+                                                            <div class="badge bg-secondary mb-3">* press ctrl to select
+                                                                multiple time slots</div>
+                                                            <div class="form-floating mb-3">
+                                                                <select id="time" name="time[]" multiple
+                                                                    style="height:290px;" class="form-control">
+
+                                                                    <option <% if(time_occupied.includes("9:00")) { %> disabled  <% } %>  value="9:00">09:00 AM</option>
+                                                                    <option <% if(time_occupied.includes("9:30")) { %> disabled  <% } %>  value="9:30">09:30 AM</option>
+                                                                    <option <% if(time_occupied.includes("10:00")) { %> disabled  <% } %>  value="10:00">10:00 AM</option>
+                                                                    <option <% if(time_occupied.includes("10:30")) { %> disabled  <% } %>   value="10:30">10:30 AM</option>
+                                                                    <option <% if(time_occupied.includes("11:00")) { %> disabled  <% } %> value="11:00">11:00 AM</option>
+                                                                    <option <% if(time_occupied.includes("11:30")) { %> disabled  <% } %> value="11:30">11:30 AM</option>
+                                                                    <option <% if(time_occupied.includes("12:00")) { %> disabled  <% } %> value="12:00">12:00 PM</option>
+                                                                    <option <% if(time_occupied.includes("12:30")) { %> disabled  <% } %> value="12:30">12:30 PM</option>
+                                                                    <option <% if(time_occupied.includes("1:00")) { %> disabled  <% } %> value="1:00">1:00 PM</option>
+                                                                    <option <% if(time_occupied.includes("1:30")) { %> disabled  <% } %> value="1:30">1:30 PM</option>
+                                                                    <option <% if(time_occupied.includes("2:00")) { %> disabled  <% } %> value="2:00">2:00 PM</option>
+                                                                </select>
+                                                                <label for="time">Select Time Slot</label>
+                                                            </div>
+
+                                                            <div class="mt-4 mb-0">
+                                                                <div class="d-grid">
+                                                                    <a class="btn btn-primary btn-block mb-3" href="/admin/appointment">Change Date</a>
+                                                                    <button class="btn btn-success btn-block"
+                                                                        type="submit">Create Slots</button>
+                                                                </div>
+
+                                                            </div>
+                                                        </form>
+
+                                                        <% } %>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    </div>
+                </section>
+        </main>
+
+
+
+        <%- include ('../layouts/footer'); %>
+
+            <%- include ('../layouts/scripts'); %>
+    </body>
+
+</html>

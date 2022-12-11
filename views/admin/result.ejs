@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include ('../layouts/header'); %>
+
+    <body>
+        <main class="flex-shrink-0">
+            <!-- Navigation-->
+            <%- include ('../layouts/navbar'); %>
+
+                <header class="bg-dark py-5">
+                    <div class="container px-5">
+                        <div class="row gx-5 align-items-center justify-content-center">
+                            <div class="col-lg-12 col-xl-12 col-xxl-12">
+                                <div class="my-5 text-center text-xl-start">
+                                    <h1 class="display-5 fw-bolder text-white mb-2">Test Results</h1>
+                                    <p class="lead fw-normal text-white-50 mb-4">Drive Test Booking Kiosk</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+
+
+                <section class="py-5">
+                    <div class="container">
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <h4>Pass Driver List</h4>
+                                <table class="table table-bordered table-striped">
+                                    <thead class="bg-success text-white">
+
+                                        <th>Name</th>
+                                        <th>licenseNo</th>
+                                        <th>Type</th>
+                                        <th>Order</th>
+
+                                    </thead>
+                                    <tbody>
+                                        <% for(i in pass){ %>
+                                            <tr>
+                                                <td>
+                                                    <%=pass[i].firstName %>
+                                                        <%=pass[i].lastName %>
+                                                </td>
+                                                <td style="word-break: break-all;">
+                                                    <%=pass[i].licenseNo %>
+                                                </td>
+                                                <td>
+                                                    <%=pass[i].TestType %>
+                                                </td>
+                                                <td>
+                                                    <a href="#" class="btn btn-sm btn-outline-success">Place Order</a>
+                                                </td>
+                                            </tr>
+
+
+                                            <%} %>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-md-6">
+                                <h4>Failed Driver List</h4>
+                                <table class="table table-bordered table-striped">
+                                    <thead class="bg-danger text-white">
+                                        <th>Name</th>
+                                        <th>licenseNo</th>
+                                        <th>Type</th>
+                                    </thead>
+                                    <tbody>
+                                        <% for(i in fail){ %>
+                                            <tr>
+                                                <td>
+                                                    <%=fail[i].firstName %>
+                                                        <%=fail[i].lastName %>
+                                                </td>
+                                                <td style="word-break: break-all;">
+                                                    <%=pass[i].licenseNo %>
+                                                </td>
+                                                <td>
+                                                    <%=pass[i].TestType %>
+                                                </td>
+
+
+                                            </tr>
+
+
+                                            <%} %>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    </div>
+                </section>
+        </main>
+
+
+
+        <%- include ('../layouts/footer'); %>
+
+            <%- include ('../layouts/scripts'); %>
+    </body>
+
+</html>

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include ('layouts/header'); %>
+
+    <body>
+
+
+        <main class="flex-shrink-0">
+            <!-- Navigation-->
+            <%- include ('layouts/navbar'); %>
+                <!-- Header-->
+
+                <% if( g2_data.TestType=="G2" && ( g2_data.result || g2_data.result==false )){ %>
+
+                    <section class="py-1">
+                        <div class="container px-1">
+                            <div class="<%= (g2_data.result) ? " alert-success" : "alert-danger" %> rounded-3 py-5 px-4
+                                px-md-5 mb-5">
+                                <div class="text-center mb-5">
+                                    <h4 class="fw-bolder">You <%= (g2_data.result) ? "Passed" : "Failed" %> The <%=
+                                                g2_data.TestType %> Test</h4>
+                                    <p class="text-muted mt-2">Examiner Comments : <%=g2_data.comments%>
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <% } %>
+
+                        <header class="py-5">
+                            <div class="container px-5">
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-8 col-xxl-6">
+                                        <div class="text-center my-5">
+                                            <h1 class="fw-bolder mb-3">G2 Test</h1>
+                                            <p class="lead fw-normal text-muted mb-4">You can book G2/G drive test from
+                                                this
+                                                Kiosk</p>
+                                            Posted by
+                                            <a href="#!" class="">DriveTest Center</a>
+                                            on September 24, 2022
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </header>
+
+                        <section class="py-5">
+                            <div class="container px-5">
+                                <div class="bg-light rounded-3 py-5 px-4 px-md-5 mb-5">
+                                    <div class="text-center mb-5">
+                                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i
+                                                class="bi bi-person-bounding-box"></i></div>
+
+                                    </div>
+                                    <div class="row gx-5 justify-content-center">
+                                        <div class="col-6">
+                                            <% if(errors !=null && errors.length> 0){ %>
+                                                <ul class="list-group mb-3">
+                                                    <% for (var i=0; i < errors.length; i++) { %>
+                                                        <li class="list-group-item list-group-item-danger">
+                                                            <%=errors[i] %>
+                                                        </li>
+                                                        <% } %>
+
+                                                </ul>
+                                                <% } %>
+                                                    <% if(success !=null && success.length> 0){ %>
+                                                        <ul class="list-group mb-3">
+                                                            <li class="list-group-item list-group-item-success">
+                                                                <%=success %>
+                                                            </li>
+                                                        </ul>
+                                                        <% } %>
+                                        </div>
+                                        <div class="col-lg-12">
+
+                                            <form method="post" action="/g2_test/update">
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <h1 class="fw-bolder">Personal Information</h1>
+                                                            <input type="hidden" name="_licenseNo"
+                                                                value="<%= g2_data.licenseNo %>">
+                                                            <div class="form-floating mb-3">
+                                                                <input name="firstName" class="form-control"
+                                                                    id="inputFirstName" type="text" placeholder=""
+                                                                    value="<%= g2_data.firstName %>">
+                                                                <label for="inputFirstName">First Name</label>
+                                                            </div>
+                                                            <div class="form-floating mb-3">
+                                                                <input name="lastName" class="form-control"
+                                                                    id="inputLastName" required type="text"
+                                                                    placeholder="" value="<%= g2_data.lastName %>">
+                                                                <label for="inputLastName">Last Name</label>
+                                                            </div>
+                                                            <div class="form-floating mb-3">
+                                                                <input name="licenseNo" class="form-control"
+                                                                    id="inputLicenseNumber" required maxlength="8"
+                                                                    minlength="8" type="text"
+                                                                    value="<%= g2_data.licenseNo %>" placeholder="">
+                                                                <label for="inputLicenseNumber">License Number</label>
+                                                            </div>
+                                                            <div class="form-floating mb-3">
+                                                                <input name="age" class="form-control" id="inputAge"
+                                                                    required value="<%= g2_data.age %>" type="number"
+                                                                    placeholder="">
+                                                                <label for="inputAge">Age</label>
+                                                            </div>
+
+
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="text-center">
+                                                                <h1 class="fw-bolder">Edit Car Information</h1>
+                                                            </div>
+
+                                                            <div class="form-floating mb-3">
+                                                                <input name="car_details[make]" class="form-control"
+                                                                    id="inputIeMake" required type="text" placeholder=""
+                                                                    value="<%= g2_data.car_details.make %>">
+                                                                <label for="inputIeMake">IE Make</label>
+                                                            </div>
+
+                                                            <div class="form-floating mb-3">
+                                                                <input name="car_details[model]" class="form-control"
+                                                                    id="inputModel" required type="text" placeholder=""
+                                                                    value="<%= g2_data.car_details.model %>">
+                                                                <label for="inputModel">Model</label>
+                                                            </div>
+
+                                                            <div class="form-floating mb-3">
+                                                                <input name="car_details[year]" class="form-control"
+                                                                    id="inputYear" required type="text" placeholder=""
+                                                                    value="<%= g2_data.car_details.year %>">
+                                                                <label for="inputYear">Year</label>
+                                                            </div>
+
+                                                            <div class="form-floating mb-3">
+                                                                <input name="car_details[plateNo]" class="form-control"
+                                                                    id="inputPlateNumber" required type="text"
+                                                                    placeholder=""
+                                                                    value="<%= g2_data.car_details.plateNo %>">
+                                                                <label for="inputPlateNumber">Plat Number</label>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div class="text-center mt-4 mb-0">
+
+                                                    <button class="btn btn-success" type="submit">Update
+                                                        Request</button>
+                                                </div>
+
+                                            </form>
+
+
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            </div>
+                        </section>
+                        <section class="py-2" id="app_div">
+                            <div class="container px-5">
+                                <div class="bg-light rounded-3 py-5 px-4 px-md-5 mb-5">
+                                    <div class="text-center mb-5">
+                                        <div class="cotainer">
+                                            <div class="offset-3 col-6 mt-4">
+                                                <div class="text-center mb-4">
+                                                    <h1 class="fw-bolder">Book Appointment</h1>
+                                                </div>
+                                                <% if(typeof g2_data.appointment_ID !=="undefined" ) { %>
+
+                                                    <div class="text-center mb-4 badge bg-primary"> Your scheduled
+                                                        <%=g2_data.TestType%> appointment <%=g2_data.appointment_ID.date
+                                                                %> at <%=g2_data.appointment_ID.time %> .
+                                                    </div>
+                                                    <% } %>
+
+
+                                                        <% if(date !="" ) { %>
+                                                            <form action="/g2_test/appointment" autocomplete="off"
+                                                                method="post">
+                                                                <% } else { %>
+                                                                    <form action="/g2_test/appointment"
+                                                                        autocomplete="off" method="get">
+                                                                        <% } %>
+
+                                                                            <div class="form-floating mb-3">
+                                                                                <input class="form-control"
+                                                                                    id="datepicker" required type="text"
+                                                                                    name="date" <% if(date !="" ) { %>
+                                                                                value="<%=date%>" disabled <% } %>
+                                                                                        placeholder="">
+                                                                                        <label
+                                                                                            for="datepicker">Date</label>
+                                                                            </div>
+
+                                                                            <% if(date !="" ) { %>
+
+                                                                                <div class="form-floating mb-3">
+                                                                                    <select id="time" name="time"
+                                                                                        class="form-control">
+                                                                                        <% if(slots.length> 0) { %>
+                                                                                            <% slots.forEach((single)=>
+                                                                                                { %>
+                                                                                                <option
+                                                                                                    value="<%=single.id%>">
+                                                                                                    <%=single.time%>
+                                                                                                </option>
+                                                                                                <% }) %>
+                                                                                                    <% } else { %>
+                                                                                                        <option
+                                                                                                            value="">No
+                                                                                                            Slots
+                                                                                                            Available
+                                                                                                            For This
+                                                                                                            Date.
+                                                                                                        </option>
+                                                                                                        <% } %>
+                                                                                    </select>
+                                                                                    <label for="time">Select Time
+                                                                                        Slot</label>
+                                                                                </div>
+
+                                                                                <% } %>
+                                                                                    <div class="mt-4 mb-0">
+                                                                                        <% if(date !="" ) { %>
+                                                                                            <div class="d-grid mb-2">
+                                                                                                <a href="/g2_test#app_div"
+                                                                                                    class="btn btn-primary">Change
+                                                                                                    Date</a>
+                                                                                            </div>
+
+                                                                                            <% } %>
+
+                                                                                                <div class="d-grid">
+                                                                                                    <button
+                                                                                                        class="btn btn-success btn-block"
+                                                                                                        type="submit">Proceed</button>
+                                                                                                </div>
+                                                                                    </div>
+                                                                    </form>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+
+        </main>
+
+
+
+        <!-- Footer-->
+        <%- include ('layouts/footer'); %>
+
+            <%- include ('layouts/scripts'); %>
+
+
+                <% if (date !="" ) { %>
+
+                    <script>
+                        window.scrollTo(0, document.body.scrollHeight);
+                    </script>
+
+                    <% }%>
+
+
+    </body>
+
+</html>
