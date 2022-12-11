@@ -40,9 +40,6 @@ global.userType = null;
 app.use(
   session({
     secret: "ASD ULTRA",
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: true }
   })
 );
 
