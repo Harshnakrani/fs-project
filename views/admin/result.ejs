@@ -41,14 +41,14 @@
                                         <% for(i in pass){ %>
                                             <tr>
                                                 <td>
-                                                    <%=pass[i].firstName %>
-                                                        <%=pass[i].lastName %>
+                                                    <%=(pass[i].firstName) ? pass[i].firstName : "" %>
+                                                        <%=(pass[i].lastName) ? pass[i].lastName : "" %>
                                                 </td>
                                                 <td style="word-break: break-all;">
-                                                    <%=pass[i].licenseNo %>
+                                                    <%=(pass[i].licenseNo) ? pass[i].licenseNo : "" %>
                                                 </td>
                                                 <td>
-                                                    <%=pass[i].TestType %>
+                                                    <%=(pass[i].TestType) ? pass[i].TestType : "" %>
                                                 </td>
                                                 <td>
                                                     <a href="#" class="btn btn-sm btn-outline-success">Place Order</a>
@@ -76,10 +76,10 @@
                                                         <%=fail[i].lastName %>
                                                 </td>
                                                 <td style="word-break: break-all;">
-                                                    <%=pass[i].licenseNo %>
+                                                    <%=fail[i].licenseNo %>
                                                 </td>
                                                 <td>
-                                                    <%=pass[i].TestType %>
+                                                    <%=fail[i].TestType %>
                                                 </td>
 
 
